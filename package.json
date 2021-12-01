@@ -1,0 +1,30 @@
+{
+  "name": "NodeJS_REST_APIs_MySQL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e * --inspect app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex": "knex"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "celebrate": "^15.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.14",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "objection": "^3.0.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
