@@ -8,7 +8,7 @@ const dbConfig = require('./config/knexfile.js');
 const knex = require('knex')(dbConfig.development);
 const { Model } = require('objection');
 Model.knex(knex);
-
+const { AppError, handleError, handleErrors,} = require('./utils/errorhandle.js');
 const routes = require('./routes/index.js');
 
 const morgan = require('morgan');
@@ -24,4 +24,5 @@ app.listen(port, function () {
 
 app.use(errors());
 
+app.use(handleErrors);
 

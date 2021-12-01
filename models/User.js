@@ -1,26 +1,24 @@
 const { Model } = require('objection');
 
-class Customer extends Model {
+class User extends Model {
 	static get tableName() {
-		return 'customers';
+		return 'users';
 	}
-
 	static get idColumn() {
-		return 'customerNumber';
+		return 'username';
 	}
-
 	static get relationMappings() {
-		const Employee = require('./Employee.js');
+		const Employee = require('./Employee');
 		return {
-			salesRep: {
+			employee: {
 				relation: Model.BelongsToOneRelation,
 				modelClass: Employee,
 				join: {
-					from: 'customers.salesRepEmployeeNumber',
+					from: 'users.employeeNumber',
 					to: 'employees.employeeNumber',
 				},
 			},
 		};
 	}
 }
-module.exports = Customer;
+module.exports = User;

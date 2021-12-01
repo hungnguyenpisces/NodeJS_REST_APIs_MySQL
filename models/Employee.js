@@ -1,6 +1,4 @@
 const { Model } = require('objection');
-// const knex = require('../config/database.js');
-// Model.knex(knex);
 
 class Employee extends Model {
 	static get tableName() {
@@ -12,7 +10,17 @@ class Employee extends Model {
 	static get relationMappings() {
 		const Office = require('./Office.js');
 		const Customer = require('./Customer.js');
+		const User = require('./User.js');
+		const Role = require('./Role.js');
 		return {
+			user: {
+				relation: Model.BelongsToOneRelation,
+				modelClass: User,
+				join: {
+					from: 'employees.employeeNumber',
+					to: 'users.employeeNumber',
+				},
+			},
 			office: {
 				relation: Model.BelongsToOneRelation,
 				modelClass: Office,
@@ -21,16 +29,20 @@ class Employee extends Model {
 					to: 'offices.officeCode',
 				},
 			},
+			role: {
+				relation: Model.BelongsToOneRelation,
+				modelClass: Role,
+				join: {
+					from: 'employees.role',
+					to: 'role.id',
+				},
+			},
 			customers: {
-				relation: Model.ManyToManyRelation,
+				relation: Model.HasManyRelation,
 				modelClass: Customer,
 				join: {
 					from: 'employees.employeeNumber',
-					through: {
-						from: 'customers.salesRepEmployeeNumber',
-						to: 'employees.employeeNumber',
-					},
-					to: 'customers.customerNumber',
+					to: 'customers.salesRepEmployeeNumber',
 				},
 			},
 		};

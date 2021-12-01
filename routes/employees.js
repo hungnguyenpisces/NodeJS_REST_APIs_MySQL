@@ -1,23 +1,17 @@
 const express = require('express');
 const router = express.Router();
-// const auth = require('../middleware/auth.js');
-const employees = require('../services/Employees.js');
-// const validate = require('../middleware/validators.js');
+const auth = require('../middleware/auth.js');
+const Employees = require('../services/Employees.js');
+const Validate = require('../middleware/Validators.js');
 
-//Employee
-// router.get( '/:employeeNumber', auth(['President', 'Manager', 'Leader']), employees.getEmployeeByNumber);
-router.get('/:employeeNumber', employees.getEmployeeByNumber);
+router.get('/:employeeNumber', auth([1,2,3]),  Employees.getEmployeeByNumber);
 
-// router.get('/', // auth(['President', 'Manager', 'Leader']), employees.getAllEmployees);
-router.get('/', employees.getAllEmployees);
+router.get('/', auth([1,2,3]),  Employees.getAllEmployees);
 
-// router.post('/', auth(['President', 'Manager']), validate.employee, employees.createEmployee);
-router.post('/', employees.createEmployee);
+router.post('/', auth([1,2]), Validate.employee,  Employees.createEmployee);
 
-// router.put('/', auth(['President', 'Manager']), validate.employee, employees.updateEmployee);
-router.put('/:employeeNumber', employees.updateEmployee);
+router.put('/:employeeNumber', auth([1,2]), Validate.employee,  Employees.updateEmployee);
 
-// router.delete('/:employeeNumber', auth(['President']), employees.deleteEmployee);
-router.delete('/:employeeNumber', employees.deleteEmployee);
+router.delete('/:employeeNumber', auth([1]), Employees.deleteEmployee);
 
 module.exports = router;

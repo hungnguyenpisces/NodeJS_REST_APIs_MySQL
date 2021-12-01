@@ -1,23 +1,17 @@
 const express = require('express');
 const router = express.Router();
-// const auth = require('../middleware/auth.js');
-const customers = require('../services/Customers.js');
-// const validate = require('../middleware/validators.js');
+const auth = require('../middleware/auth.js');
+const Customers = require('../services/Customers.js');
+const Validate = require('../middleware/Validators.js');
 
-//Customer
-// router.get(	'/:customerNumber',	auth(['President', 'Manager', 'Leader', 'Staff']),	customers.getCustomerByNumber);
-router.get('/:customerNumber', customers.getCustomerByNumber);
+router.get(	'/:customerNumber',	auth([1,2,3,4]), Customers.getCustomerByNumber);
 
-// router.get('/',	auth(['President', 'Manager', 'Leader', 'Staff']),	customers.getAllCustomers);
-router.get('/', customers.getAllCustomers);
+router.get('/',	auth([1,2,3,4]), Customers.getAllCustomers);
 
-// router.post('/', auth(['President', 'Manager', 'Leader', 'Staff']), validate.customer, customers.createCustomer);
-router.post('/', customers.createCustomer);
+router.post('/', auth([1,2,3,4]), Validate.customer, Customers.createCustomer);
 
-// router.put('/', auth(['President', 'Manager', 'Leader']), customers.updateCustomer);
-router.put('/:customerNumber', customers.updateCustomer);
+router.put('/:customerNumber', auth([1,2,3]), Validate.customer, Customers.updateCustomer);
 
-// router.delete('/:customerNumber', auth(['President', 'Manager', 'Leader']), customers.deleteCustomer);
-router.delete('/:customerNumber', customers.deleteCustomer);
+router.delete('/:customerNumber', auth([1,2,3]), Customers.deleteCustomer);
 
 module.exports = router;

@@ -1,27 +1,25 @@
 const { Model } = require('objection');
 
-class Office extends Model {
+class Role extends Model {
 	static get tableName() {
-		return 'offices';
+		return 'roles';
 	}
-
 	static get idColumn() {
-		return 'officeCode';
+		return 'id';
 	}
 
-	static get relationMappings() {
+	static relationMappings() {
 		const Employee = require('./Employee.js');
-
 		return {
 			employees: {
 				relation: Model.HasManyRelation,
 				modelClass: Employee,
 				join: {
-					from: 'offices.officeCode',
-					to: 'employees.officeCode',
+					from: 'roles.id',
+					to: 'employees.role',
 				},
 			},
 		};
 	}
 }
-module.exports = Office;
+module.exports = Role;
